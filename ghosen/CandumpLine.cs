@@ -54,5 +54,10 @@ namespace ghosen
 
 			return epoch.AddSeconds(seconds).AddTicks((long)(TicksPerMicrosecond * microseconds));
 		}
+
+		public override string ToString()
+		{
+			return $@"{Time.ToLocalTime()} {Interface} {Message}";
+		}
 	}
 }
