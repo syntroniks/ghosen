@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -26,9 +27,13 @@ namespace ghosen
 			InitializeComponent();			
 		}
 
-		private void Window_Loaded(object sender, RoutedEventArgs e)
+		private async void Window_Loaded(object sender, RoutedEventArgs e)
 		{
-			var p = CandumpParser.ParseStream(File.OpenRead("../../candump-2017-01-06_135802.log"));
+			var sw = Stopwatch.StartNew();
+			var a = await CandumpParser.ParseLines(File.ReadAllLines("../../candump-2017-01-06_135802.log"), new ghosen.CandumpParserArbIdFilter(new List<uint>() { 0x7E0, 0x7E8 }));
+			sw.Stop();
+			Debug.WriteLine($"Parsed {a.Count} lines in {sw.ElapsedMilliseconds/1000.0d} seconds");
+			//var p = CandumpParser.ParseStream(File.OpenRead("../../candump-2017-01-06_135802.log"));
 		}
 	}
 }

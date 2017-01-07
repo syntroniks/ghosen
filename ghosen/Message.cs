@@ -31,7 +31,7 @@ namespace ghosen
 			var ret = new Message();
 
 			// Parse id first
-			var arbIdMatcher = Regex.Match(messageString, @"([A-Fa-f0-9]{3})#");
+			var arbIdMatcher = Regex.Match(messageString, @" ([A-Fa-f0-9]{3})#");
 
 			// We could extract the arb id
 			if (arbIdMatcher.Groups.Count == 2)
@@ -53,11 +53,16 @@ namespace ghosen
 				// extract the raw data
 				var rawDataString = rawDataMatcher.Groups[1].Value;
 				// parse the raw data
-				var candidateRawData = Utils.StringToByteArray(rawDataString);
+				var candidateRawData = Utils.StringToByteArrayFastest(rawDataString);
 				ret.RawData = candidateRawData;
 			}
 
 			return ret;
+		}
+
+		public override string ToString()
+		{
+			return $@"{String.Format("{0:X3}", ArbId)}#{Utils.ByteArrayToHexViaLookup32(RawData)}";
 		}
 	}
 }

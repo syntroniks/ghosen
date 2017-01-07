@@ -38,5 +38,40 @@ namespace ghosen
 
 			return ret;
 		}
+		public static async Task<List<CandumpLine>> ParseLines(string[] lines, CandumpParserArbIdFilter filter = null)
+		{
+			var ret = new List<CandumpLine>();
+			var pastProgress = 0;
+			for (int i = 0; i < lines.Length; i++)
+			{
+				var curProgress = ((i*100) / lines.Length);
+				if (curProgress != pastProgress)
+				{
+					pastProgress = curProgress;
+					//Debug.WriteLine(curProgress);
+				}
+
+				var currentLineStr = lines[i];
+				var currentLine = CandumpLine.Parse(currentLineStr);
+				if (filter != null)
+				{
+					if (filter.ShouldAcceptLine(currentLine))
+					{
+						ret.Add(currentLine);
+					}
+					else
+					{
+						continue;
+					}
+				}
+				else
+				{
+					// we have no filter, accept all
+					ret.Add(currentLine);
+				}
+			}
+
+			return ret;
+		}
 	}
 }
