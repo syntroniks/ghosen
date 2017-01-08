@@ -68,6 +68,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CandumpParserArbIdFilter.cs" />
+    <Compile Include="ISO-TP\Framing.cs" />
+    <Compile Include="ISO14229\Messages.cs" />
+    <Compile Include="ISO14229\Services.cs" />
     <Compile Include="Utils.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

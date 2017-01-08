@@ -33,6 +33,9 @@ namespace ghosen
 			var a = await CandumpParser.ParseLines(File.ReadAllLines("../../candump-2017-01-06_135802.log"), new ghosen.CandumpParserArbIdFilter(new List<uint>() { 0x7E0, 0x7E8 }));
 			sw.Stop();
 			Debug.WriteLine($"Parsed {a.Count} lines in {sw.ElapsedMilliseconds/1000.0d} seconds");
+			var messageList = a.Select((va) => va.Message).ToList();
+			var messages = ISO_TP.ISO_TP_Session.ProcessFrames(messageList);
+			var commands = ISO14229.Messages.ProcessMessages(messages);
 			//var p = CandumpParser.ParseStream(File.OpenRead("../../candump-2017-01-06_135802.log"));
 		}
 	}
