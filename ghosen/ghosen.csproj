@@ -67,8 +67,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="CandumpParserArbIdFilter.cs" />
+    <Compile Include="Candump\CandumpParserArbIdFilter.cs" />
     <Compile Include="ISO-TP\Framing.cs" />
+    <Compile Include="ISO-TP\Message.cs" />
     <Compile Include="ISO14229\Messages.cs" />
     <Compile Include="ISO14229\Services.cs" />
     <Compile Include="Utils.cs" />
@@ -80,9 +81,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CandumpLine.cs" />
-    <Compile Include="CandumpParser.cs" />
-    <Compile Include="Message.cs" />
+    <Compile Include="Candump\CandumpLine.cs" />
+    <Compile Include="Candump\CandumpParser.cs" />
+    <Compile Include="CAN\Message.cs" />
     <Compile Include="ArbitrationId.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ghosen.Candump;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -27,12 +28,12 @@ namespace ghosen
 			InitializeComponent();			
 		}
 
-		private async void Window_Loaded(object sender, RoutedEventArgs e)
+		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			var sw = Stopwatch.StartNew();
-			var a = await CandumpParser.ParseLines(File.ReadAllLines("../../candump-2017-01-06_135802.log"), new ghosen.CandumpParserArbIdFilter(new List<uint>() { 0x7E0, 0x7E8 }));
+			var a = CandumpParser.ParseLines(File.ReadAllLines("../../candump-2017-01-06_135802.log"), new CandumpParserArbIdFilter(new List<uint>() { 0x7E0, 0x7E8 }));
 			sw.Stop();
-			Debug.WriteLine($"Parsed {a.Count} lines in {sw.ElapsedMilliseconds/1000.0d} seconds");
+			//Debug.WriteLine($"Parsed {a.Count} lines in {sw.ElapsedMilliseconds/1000.0d} seconds");
 			var messageList = a.Select((va) => va.Message).ToList();
 			var messages = ISO_TP.ISO_TP_Session.ProcessFrames(messageList);
 			var commands = ISO14229.Messages.ProcessMessages(messages);
