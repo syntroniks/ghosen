@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ghosen.ISO14229
 {
-	public enum Services
+	public enum ServiceType
 	{
 		// Diagnostic and communication management functional unit
 		DiagnosticSessionControl = 0x10, // The client requests to control a diagnostic session with a server(s). 
@@ -36,5 +36,11 @@ namespace ghosen.ISO14229
 		TransferData = 0x36, // For the actual transmission of data, the service "Transfer Data" is used.This service is used for both uploading and downloading data.The transfer direction is notified in advance by the service "Request Download" or "Upload Request". This service should try to send packets at maximum length, as specified in previous services. If the data set is larger than the maximum, the "Transfer Data" service must be used several times in succession until all data has arrived.
 		RequestTransferExit = 0x37, // A data transmission can be 'completed' when using the "Transfer Exit" service.This service is used for comparison between the control unit and the tester.When it is running, a control unit can answer negatively on this request to stop a data transfer request.This will be used when the amount of data (set in "Request Download" or "Upload Request") has not been transferred.
 		RequestFileTransfer = 0x38 // This service is used to initiate a file download from the client to the server or upload from the server to the client. Additionally information about the file system are available by this service.
+	}
+
+	public enum ServiceMessageType
+	{
+		Request,
+		Response
 	}
 }

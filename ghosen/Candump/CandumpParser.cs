@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ghosen
+namespace ghosen.Candump
 {
 	public class CandumpParser
 	{
@@ -38,7 +38,7 @@ namespace ghosen
 
 			return ret;
 		}
-		public static async Task<List<CandumpLine>> ParseLines(string[] lines, CandumpParserArbIdFilter filter = null)
+		public static List<CandumpLine> ParseLines(string[] lines, CandumpParserArbIdFilter filter = null)
 		{
 			var ret = new List<CandumpLine>();
 			var pastProgress = 0;

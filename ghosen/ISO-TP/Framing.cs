@@ -8,12 +8,13 @@ namespace ghosen.ISO_TP
 {
 	public class ISO_TP_Session
 	{
-		public static List<byte[]> ProcessFrames(List<Message> messages)
+		public static List<ISO_TP.Message> ProcessFrames(List<ghosen.CAN.Message> messages)
 		{
 			bool awaitingConsecutive = false;
 			int awaitingLength = 0;
 			List<byte> rawDataCollector = new List<byte>();
 			List<byte[]> finishedMessages = new List<byte[]>();
+			List<ISO_TP.Message> realMessages = new List<ISO_TP.Message>();
 
 			for (int i = 0; i < messages.Count(); i++)
 			{
@@ -23,6 +24,12 @@ namespace ghosen.ISO_TP
 					case Framing.FrameType.Single:
 						var castFrame3 = (Framing.SingleFrame)parsedFrame;
 						finishedMessages.Add(castFrame3.RawData);
+						realMessages.Add(new ISO_TP.Message()
+						{
+							ArbId = new ArbitrationId(messages[i].ArbId),
+							Payload = castFrame3.RawData,
+							PayloadSize = castFrame3.Length
+						});
 						break;
 					case Framing.FrameType.First:
 						awaitingConsecutive = true;
@@ -46,6 +53,14 @@ namespace ghosen.ISO_TP
 								awaitingLength = 0;
 								awaitingConsecutive = false;
 								finishedMessages.Add(rawDataCollector.ToArray());
+								realMessages.Add(new ISO_TP.Message()
+								{
+									ArbId = new ArbitrationId(messages[i].ArbId),
+									Payload = rawDataCollector.ToArray(),
+									PayloadSize = awaitingLength,
+									Complete = true,
+									MultiFrame = true
+								});
 							}
 						}
 						else
@@ -60,7 +75,7 @@ namespace ghosen.ISO_TP
 						break;
 				}
 			}
-			return finishedMessages;
+			return realMessages;
 		}
 	}
 
@@ -111,6 +126,7 @@ namespace ghosen.ISO_TP
 		public class Frame
 		{
 			public FrameType FrameType { get; set; }
+			public byte[] RawData { get; set; }
 
 			public Frame(byte[] message)
 			{
@@ -121,7 +137,6 @@ namespace ghosen.ISO_TP
 		public class SingleFrame : Frame
 		{
 			public byte Length { get; set; }
-			public byte[] RawData { get; set; }
 
 			public SingleFrame(byte[] message)
 				: base(message)
@@ -139,7 +154,6 @@ namespace ghosen.ISO_TP
 		public class FirstFrame : Frame
 		{
 			public ushort Length { get; set; }
-			public byte[] RawData { get; set; }
 
 			public FirstFrame(byte[] message)
 				: base(message)
@@ -159,7 +173,6 @@ namespace ghosen.ISO_TP
 		public class ConsecutiveFrame : Frame
 		{
 			public byte Index { get; set; } // 0x00 - 0x0F
-			public byte[] RawData { get; set; }
 
 			public ConsecutiveFrame(byte[] message)
 				: base(message)
