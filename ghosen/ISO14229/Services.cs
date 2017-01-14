@@ -29,6 +29,8 @@ namespace ghosen.ISO14229
 		WriteDataByIdentifier = 0x2E, // The client requests to write a record specified by a provided dataIdentifier.
 		WriteMemoryByAddress = 0x3D, // The client requests to overwrite a provided memory range. 
 
+		RoutineControl = 0x31,
+
 		// documentation currently missing.
 		// So far it is wikipedia only
 		RequestDownload = 0x34, // Downloading new software or other data into the control unit is introduced using the "Request Download". Here, the location and size of the data is specified.In turn, the controller specifies how large the data packets can be.
