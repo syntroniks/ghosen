@@ -80,6 +80,41 @@ namespace ghosen.ISO14229
 			return $"{base.ToString()} : {SubFunction} [{Utils.ByteArrayToHexViaLookup32(SecurityAccessDataRecord)}]";
 		}
 	}
+	public class RoutineControl : ISO14229Message
+	{
+		public enum RoutineControlType
+		{
+			ISOSAEReserved,
+			StartRoutine,
+			StopRoutine,
+			RequestRoutineResults,
+		}
+
+		public RoutineControlType SubFunction { get; set; }
+
+		public UInt16 RoutineIdentifier { get; set; }
+
+		public byte[] RoutineControlOptionRecord { get; set; }
+
+		public RoutineControl(ISO_TP.Message message)
+			: base(message)
+		{
+			SubFunction = (RoutineControlType)message.Payload[1];
+			RoutineIdentifier = BitConverter.ToUInt16(message.Payload, 2);
+			RoutineControlOptionRecord = message.Payload.Skip(4).ToArray();
+			if (base.MessageType == ServiceMessageType.Request)
+			{
+			}
+			else
+			{
+			}
+		}
+
+		public override string ToString()
+		{
+			return $"{base.ToString()} : {SubFunction} {RoutineIdentifier} [{Utils.ByteArrayToHexViaLookup32(RoutineControlOptionRecord)}]";
+		}
+	}
 	public class ISO14229Message
 	{
 		public ServiceType Service { get; set; }
@@ -155,6 +190,7 @@ namespace ghosen.ISO14229
 				case ServiceType.WriteMemoryByAddress:
 					break;
 				case ServiceType.RoutineControl:
+					return new RoutineControl(message);
 					break;
 				case ServiceType.RequestDownload:
 					break;
@@ -180,7 +216,8 @@ namespace ghosen.ISO14229
 			List<ISO14229Message> ret = new List<ISO14229Message>();
 			for (int i = 0; i < messages.Count; i++)
 			{
-				ret.Add(new ISO14229.ISO14229Message(messages[i]));
+				// .Create tries to make a specific child class if possible.
+				// Otherwise, it just makes the base class
 				ret.Add(ISO14229.ISO14229Message.Create(messages[i]));
 			}
 			return ret;
