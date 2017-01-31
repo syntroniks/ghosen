@@ -72,6 +72,7 @@
     <Compile Include="ISO-TP\Message.cs" />
     <Compile Include="ISO14229\Messages.cs" />
     <Compile Include="ISO14229\Services.cs" />
+    <Compile Include="ISO15031\Services.cs" />
     <Compile Include="Utils.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
