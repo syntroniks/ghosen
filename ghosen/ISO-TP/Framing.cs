@@ -28,7 +28,9 @@ namespace ghosen.ISO_TP
 						{
 							ArbId = new ArbitrationId(messages[i].ArbId),
 							Payload = castFrame3.RawData,
-							PayloadSize = castFrame3.Length
+							PayloadSize = castFrame3.Length,
+                            Complete = true,
+                            MultiFrame = false
 						});
 						break;
 					case Framing.FrameType.First:
