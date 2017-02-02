@@ -10,15 +10,6 @@ namespace ghosen.Candump
 {
 	public class CandumpParser
 	{
-		// open file
-		// spin off worker
-		// {
-		// read file line
-		// parse file line
-		// return file line to thread safe queue
-		// }
-		// worker completed
-
 		public static async Task<List<CandumpLine>> ParseStream(Stream s)
 		{
 			var ret = new List<CandumpLine>();

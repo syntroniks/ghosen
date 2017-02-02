@@ -71,6 +71,11 @@
     <Compile Include="ISO-TP\Framing.cs" />
     <Compile Include="ISO-TP\Message.cs" />
     <Compile Include="ISO14229\Messages.cs" />
+    <Compile Include="ISO14229\Messages\DiagnosticSessionControl.cs" />
+    <Compile Include="ISO14229\Messages\RequestDownload.cs" />
+    <Compile Include="ISO14229\Messages\RequestUpload.cs" />
+    <Compile Include="ISO14229\Messages\RoutineControl.cs" />
+    <Compile Include="ISO14229\Messages\SecurityAccessControl.cs" />
     <Compile Include="ISO14229\Services.cs" />
     <Compile Include="ISO15031\Services.cs" />
     <Compile Include="Utils.cs" />
