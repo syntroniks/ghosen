@@ -15,6 +15,12 @@ namespace ghosen.Candump
 
 		public CAN.Message Message { get; set; }
 
+        public CandumpLine()
+        {
+            Interface = "";
+            Message = new CAN.Message();
+        }
+
 		public static CandumpLine Parse(string line)
 		{
 			var ret = new CandumpLine();
