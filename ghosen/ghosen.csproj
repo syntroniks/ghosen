@@ -90,7 +90,7 @@
     <Compile Include="Candump\CandumpLine.cs" />
     <Compile Include="Candump\CandumpParser.cs" />
     <Compile Include="CAN\Message.cs" />
-    <Compile Include="ArbitrationId.cs" />
+    <Compile Include="ISO-TP\ArbitrationId.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
