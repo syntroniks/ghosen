@@ -16,7 +16,7 @@ namespace ghosen.Tests
             var testLine = "";
 
             // act
-            var result = ghosen.Candump.CandumpLine.Parse(testLine);
+            var result = ghosen.Parsers.Candump.CandumpLine.Parse(testLine);
 
             // assert
             Assert.AreEqual(default(DateTime), result.Time);
@@ -34,7 +34,7 @@ namespace ghosen.Tests
             var testLine = "(1400000000.1000) vcan6 ";
 
             // act
-            var result = ghosen.Candump.CandumpLine.Parse(testLine);
+            var result = ghosen.Parsers.Candump.CandumpLine.Parse(testLine);
 
             // assert
             Assert.AreEqual(DateTime.Parse("5/13/2014 4:53:20 PM").Date, result.Time.Date);

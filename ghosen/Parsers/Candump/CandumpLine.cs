@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 
-namespace ghosen.Candump
+namespace ghosen.Parsers.Candump
 {
 	public class CandumpLine
 	{
@@ -43,7 +43,7 @@ namespace ghosen.Candump
 				ret.Interface = interfaceMatch.Groups[1].Value;
 			}
 
-			ret.Message = CAN.Message.Parse(line);
+			ret.Message = CandumpParser.ParseCandumpMessage(line);
 
 			return ret;
 		}

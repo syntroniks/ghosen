@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ghosen.Candump
+namespace ghosen.Parsers.Candump
 {
     /// <summary>
     /// This class implements an optional <see cref="CandumpParser"/> filter.

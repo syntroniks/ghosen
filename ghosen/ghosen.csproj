@@ -67,7 +67,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Candump\CandumpParserArbIdFilter.cs" />
+    <Compile Include="Parsers\Kvaser\KvaserLine.cs" />
+    <Compile Include="Parsers\Kvaser\KvaserParser.cs" />
+    <Compile Include="Parsers\Kvaser\KvaserParserArbIdFilter.cs" />
+    <Compile Include="Parsers\Candump\CandumpParserArbIdFilter.cs" />
     <Compile Include="ISO-TP\Framing.cs" />
     <Compile Include="ISO-TP\Message.cs" />
     <Compile Include="ISO14229\Messages.cs" />
@@ -87,8 +90,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Candump\CandumpLine.cs" />
-    <Compile Include="Candump\CandumpParser.cs" />
+    <Compile Include="Parsers\Candump\CandumpLine.cs" />
+    <Compile Include="Parsers\Candump\CandumpParser.cs" />
     <Compile Include="CAN\Message.cs" />
     <Compile Include="ISO-TP\ArbitrationId.cs" />
     <Compile Include="MainWindow.xaml.cs">

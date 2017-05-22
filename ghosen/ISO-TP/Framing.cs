@@ -19,6 +19,11 @@ namespace ghosen.ISO_TP
 			for (int i = 0; i < messages.Count(); i++)
 			{
 				var parsedFrame = Framing.FrameParser.Parse(messages[i].RawData);
+                if (parsedFrame == null)
+                {
+                    Console.WriteLine("SOMETHING WENT WRONG, HELP ME!");
+                    continue;
+                }
 				switch (parsedFrame.FrameType)
 				{
 					case Framing.FrameType.Single:
