@@ -4,19 +4,19 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace ghosen.Tests
 {
     [TestClass]
-    public class CanDumpTests
+    public class KvaserTests
     {
         /// <summary>
         /// An empty line will leave all fields default initialized
         /// </summary>
         [TestMethod]
-        public void CanDumpEmptyLineTest()
+        public void KvaserEmptyLineTest()
         {
             // arrange
             var testLine = "";
 
             // act
-            var result = ghosen.Parsers.Candump.CandumpLine.Parse(testLine);
+            var result = ghosen.Parsers.Kvaser.KvaserLine.Parse(testLine);
 
             // assert
             Assert.AreEqual(default(DateTime), result.Time);
@@ -28,17 +28,17 @@ namespace ghosen.Tests
         /// A partial line will leave unspecified fields default initialized
         /// </summary>
         [TestMethod]
-        public void CanDumpPartialLineTest()
+        public void KvaserPartialLineTest()
         {
             // arrange
-            var testLine = "(1400000000.1000) vcan6 ";
+            var testLine = " 1827.826927  1         7E0    Rx  ";
 
             // act
-            var result = ghosen.Parsers.Candump.CandumpLine.Parse(testLine);
+            var result = ghosen.Parsers.Kvaser.KvaserLine.Parse(testLine);
 
             // assert
-            Assert.AreEqual(DateTime.Parse("5/13/2014 4:53:20 PM").Date, result.Time.Date);
-            Assert.AreEqual("vcan6", result.Interface);
+            Assert.AreEqual(TimeSpan.FromSeconds(1827.826927), result.Time.TimeOfDay);
+            Assert.AreEqual(string.Empty, result.Interface);
             Assert.AreEqual(null, result.Message);
         }
     }
