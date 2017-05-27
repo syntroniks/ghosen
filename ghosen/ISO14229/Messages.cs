@@ -69,6 +69,7 @@ namespace ghosen.ISO14229
 				case ServiceType.LinkControl:
 					break;
 				case ServiceType.ReadDataByIdentifier:
+                    return new ReadDataByIdentifier(message);
 					break;
 				case ServiceType.ReadMemoryByAddress:
 					break;
