@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 
-namespace ghosen.Candump
+namespace ghosen.Plugins
 {
-	public class CandumpLine
+    internal class CandumpLine
 	{
 		public DateTime Time { get; set; }
 

@@ -8,7 +8,7 @@ namespace ghosen.ISO_TP
 {
 	public class ISO_TP_Session
 	{
-		public static List<ISO_TP.Message> ProcessFrames(List<ghosen.CAN.Message> messages)
+		public static IEnumerable<ISO_TP.Message> ProcessFrames(IEnumerable<ghosen.CAN.Message> messages)
 		{
 			bool awaitingConsecutive = false;
 			int awaitingLength = 0;
@@ -16,22 +16,22 @@ namespace ghosen.ISO_TP
 			List<byte[]> finishedMessages = new List<byte[]>();
 			List<ISO_TP.Message> realMessages = new List<ISO_TP.Message>();
 
-			for (int i = 0; i < messages.Count(); i++)
+			foreach (var message in messages)
 			{
-				var parsedFrame = Framing.FrameParser.Parse(messages[i].RawData);
+				var parsedFrame = Framing.FrameParser.Parse(message.RawData);
 				switch (parsedFrame.FrameType)
 				{
 					case Framing.FrameType.Single:
 						var castFrame3 = (Framing.SingleFrame)parsedFrame;
 						finishedMessages.Add(castFrame3.RawData);
-						realMessages.Add(new ISO_TP.Message()
-						{
-							ArbId = new ArbitrationId(messages[i].ArbId),
+                        yield return new ISO_TP.Message()
+                        {
+							ArbId = new ArbitrationId(message.ArbId),
 							Payload = castFrame3.RawData,
 							PayloadSize = castFrame3.Length,
                             Complete = true,
                             MultiFrame = false
-						});
+						};
 						break;
 					case Framing.FrameType.First:
 						awaitingConsecutive = true;
@@ -55,14 +55,14 @@ namespace ghosen.ISO_TP
 								awaitingLength = 0;
 								awaitingConsecutive = false;
 								finishedMessages.Add(rawDataCollector.ToArray());
-								realMessages.Add(new ISO_TP.Message()
-								{
-									ArbId = new ArbitrationId(messages[i].ArbId),
-									Payload = rawDataCollector.ToArray(),
-									PayloadSize = awaitingLength,
-									Complete = true,
-									MultiFrame = true
-								});
+                                yield return new ISO_TP.Message()
+                                {
+                                    ArbId = new ArbitrationId(message.ArbId),
+                                    Payload = rawDataCollector.ToArray(),
+                                    PayloadSize = awaitingLength,
+                                    Complete = true,
+                                    MultiFrame = true
+                                };
 							}
 						}
 						else
@@ -77,7 +77,7 @@ namespace ghosen.ISO_TP
 						break;
 				}
 			}
-			return realMessages;
+            yield break;
 		}
 	}
 

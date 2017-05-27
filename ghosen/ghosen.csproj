@@ -20,7 +20,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -29,7 +29,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -67,7 +67,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Candump\CandumpParserArbIdFilter.cs" />
+    <Compile Include="IPluginV1.cs" />
     <Compile Include="ISO-TP\Framing.cs" />
     <Compile Include="ISO-TP\Message.cs" />
     <Compile Include="ISO14229\Messages.cs" />
@@ -78,6 +78,7 @@
     <Compile Include="ISO14229\Messages\SecurityAccessControl.cs" />
     <Compile Include="ISO14229\Services.cs" />
     <Compile Include="ISO15031\Services.cs" />
+    <Compile Include="PluginLoader.cs" />
     <Compile Include="Utils.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -87,8 +88,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Candump\CandumpLine.cs" />
-    <Compile Include="Candump\CandumpParser.cs" />
     <Compile Include="CAN\Message.cs" />
     <Compile Include="ISO-TP\ArbitrationId.cs" />
     <Compile Include="MainWindow.xaml.cs">

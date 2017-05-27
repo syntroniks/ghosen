@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ghosen.Candump
+namespace ghosen.Plugins
 {
     /// <summary>
     /// This class implements an optional <see cref="CandumpParser"/> filter.
     /// This filter passes messages which have an arbitration ID matching one the filter is configured to accept.
     /// All other messages are dropped
     /// </summary>
-	public class CandumpParserArbIdFilter
+	internal class CandumpParserArbIdFilter
 	{
 		public IList<uint> ArbIds { get; private set; }
 

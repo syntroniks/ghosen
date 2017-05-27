@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ghosen.Candump
+namespace ghosen.Plugins
 {
-	public class CandumpParser
+    internal class CandumpParser
 	{
 		public static async Task<List<CandumpLine>> ParseStream(Stream s)
 		{
