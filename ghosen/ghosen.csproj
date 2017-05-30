@@ -67,11 +67,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="FileExtractor\FileExtractor.cs" />
     <Compile Include="IPluginV1.cs" />
     <Compile Include="ISO-TP\Framing.cs" />
     <Compile Include="ISO-TP\Message.cs" />
     <Compile Include="ISO14229\Messages.cs" />
     <Compile Include="ISO14229\Messages\DiagnosticSessionControl.cs" />
+    <Compile Include="ISO14229\Messages\TransferData.cs" />
     <Compile Include="ISO14229\Messages\RequestDownload.cs" />
     <Compile Include="ISO14229\Messages\RequestUpload.cs" />
     <Compile Include="ISO14229\Messages\RoutineControl.cs" />

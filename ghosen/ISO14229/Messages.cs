@@ -93,7 +93,8 @@ namespace ghosen.ISO14229
 					return new RequestUpload(message);
 					break;
 				case ServiceType.TransferData:
-					break;
+                    return new TransferData(message);
+                    break;
 				case ServiceType.RequestTransferExit:
 					break;
 				case ServiceType.RequestFileTransfer:

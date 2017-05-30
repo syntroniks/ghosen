@@ -38,7 +38,8 @@ namespace ghosen
 			var candumpLines = File.ReadAllLines("../../candump-2017-01-06_135802.log");
             var msg = parser.ParseLines(candumpLines);
             var messages = ISO_TP.ISO_TP_Session.ProcessFrames(msg);
-            var commands = ISO14229.MessageParser.ProcessMessages(messages).ToList();
+            var commands = ISO14229.MessageParser.ProcessMessages(messages);
+            var fileChunks = FileExtractor.FileExtractor.ProcessMessages(commands).ToList();
 
             /*
             var a = CandumpParser.ParseLines(candumpLines, filter);
