@@ -83,7 +83,7 @@ namespace ghosen.ISO14229
 				case ServiceType.WriteMemoryByAddress:
 					break;
 				case ServiceType.RoutineControl:
-					return new RoutineControl(message);
+					return new RoutineControl_SIMOS18(message);
 					break;
 				case ServiceType.RequestDownload:
 					return new RequestDownload(message);
