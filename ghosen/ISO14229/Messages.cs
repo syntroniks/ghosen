@@ -69,6 +69,7 @@ namespace ghosen.ISO14229
 				case ServiceType.LinkControl:
 					break;
 				case ServiceType.ReadDataByIdentifier:
+                    return new ReadDataByIdentifier(message);
 					break;
 				case ServiceType.ReadMemoryByAddress:
 					break;
@@ -92,7 +93,8 @@ namespace ghosen.ISO14229
 					return new RequestUpload(message);
 					break;
 				case ServiceType.TransferData:
-					break;
+                    return new TransferData(message);
+                    break;
 				case ServiceType.RequestTransferExit:
 					break;
 				case ServiceType.RequestFileTransfer:
@@ -106,16 +108,15 @@ namespace ghosen.ISO14229
 
 	public class MessageParser
 	{
-		public static List<ISO14229Message> ProcessMessages(List<ISO_TP.Message> messages)
+		public static IEnumerable<ISO14229Message> ProcessMessages(IEnumerable<ISO_TP.Message> messages)
 		{
-			List<ISO14229Message> ret = new List<ISO14229Message>();
-			for (int i = 0; i < messages.Count; i++)
+			foreach (var msg in messages)
 			{
 				// .Create tries to make a specific child class if possible.
 				// Otherwise, it just makes the base class
-				ret.Add(ISO14229.ISO14229Message.Create(messages[i]));
+				yield return ISO14229.ISO14229Message.Create(msg);
 			}
-			return ret;
+            yield break;
 		}
 	}
 }

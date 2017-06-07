@@ -79,7 +79,7 @@ namespace ghosen.ISO14229.Messages
 
         public override string ToString()
         {
-            return $"{base.ToString()} : 0x{MemoryAddress:X} : {MemorySize}";
+            return $"{base.ToString()} : 0x{MemoryAddress:X} : 0x{MemorySize:X}";
         }
     }
 }

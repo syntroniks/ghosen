@@ -59,6 +59,10 @@
       <Project>{8247fe08-01ee-4112-8af9-61ef69dc4d8b}</Project>
       <Name>ghosen</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Plugins\CandumpFile\CandumpFile.csproj">
+      <Project>{5d17ff77-5157-4e0c-b6cc-80e24f5cc3f3}</Project>
+      <Name>CandumpFile</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
