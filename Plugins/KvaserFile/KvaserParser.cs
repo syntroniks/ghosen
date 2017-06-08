@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace ghosen.Parsers.Kvaser
+namespace ghosen.Plugins
 {
     public class KvaserParser
     {
@@ -81,43 +81,5 @@ namespace ghosen.Parsers.Kvaser
             lines = lines.Skip(16).ToArray();
         }
 
-        public static CAN.Message ParseKvaserMessage(string messageString)
-        {
-            var ret = new CAN.Message();
-
-            // Parse id first
-            var arbIdMatcher = Regex.Match(messageString, @" ([A-Fa-f0-9]{3}) ");
-
-            // We could extract the arb id
-            if (arbIdMatcher.Groups.Count == 2)
-            {
-                // extract the arb id
-                var arbIdString = arbIdMatcher.Groups[1].Value;
-                // parse the arb id
-                var candidateArbId = uint.Parse(arbIdString, System.Globalization.NumberStyles.HexNumber);
-                ret.ArbId = candidateArbId;
-            }
-
-
-            // Now handle data (only 8 byte packets at the moment)
-            var rawDataMatcher = Regex.Match(messageString, @"( ([A-Fa-f0-9]{2} )+)");
-
-            // We could extract the raw data
-            if (rawDataMatcher.Groups.Count >= 2)
-            {
-                // extract the raw data
-                var rawDataString = rawDataMatcher.Groups[1].Value.Replace(" ", "");
-                // parse the raw data
-                var candidateRawData = Utils.StringToByteArrayFastest(rawDataString);
-                ret.RawData = candidateRawData;
-            }
-            else
-            {
-                // no raw data, throw off a cliff.
-                return null;
-            }
-
-            return ret;
-        }
     }
 }

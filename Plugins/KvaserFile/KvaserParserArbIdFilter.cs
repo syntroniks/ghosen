@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ghosen.Parsers.Candump
+namespace ghosen.Plugins
 {
     /// <summary>
     /// This class implements an optional <see cref="CandumpParser"/> filter.
     /// This filter passes messages which have an arbitration ID matching one the filter is configured to accept.
     /// All other messages are dropped
     /// </summary>
-	public class CandumpParserArbIdFilter
+	public class KvaserParserArbIdFilter
 	{
 		public IList<uint> ArbIds { get; private set; }
 
@@ -19,7 +19,7 @@ namespace ghosen.Parsers.Candump
         /// Construct a new filter with the given arbitration ids
         /// </summary>
         /// <param name="arbIds">a collection of arbitration ids this filter will accept</param>
-		public CandumpParserArbIdFilter(IList<uint> arbIds)
+		public KvaserParserArbIdFilter(IList<uint> arbIds)
 		{
 			ArbIds = arbIds;
 		}
@@ -28,8 +28,8 @@ namespace ghosen.Parsers.Candump
         /// This function calculates whether a given candump line should be accepted or not
         /// </summary>
         /// <param name="line">the candump line to test for acceptance</param>
-        /// <returns>true if the given <see cref="CandumpLine"/> should be accepted, otherwise false</returns>
-		public bool ShouldAcceptLine(CandumpLine line)
+        /// <returns>true if the given <see cref="KvaserLine"/> should be accepted, otherwise false</returns>
+		public bool ShouldAcceptLine(KvaserLine line)
 		{
 			for (int i = 0; i < ArbIds.Count; i++)
 			{

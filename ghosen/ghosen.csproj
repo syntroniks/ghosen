@@ -67,10 +67,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Parsers\Kvaser\KvaserLine.cs" />
-    <Compile Include="Parsers\Kvaser\KvaserParser.cs" />
-    <Compile Include="Parsers\Kvaser\KvaserParserArbIdFilter.cs" />
-    <Compile Include="Parsers\Candump\CandumpParserArbIdFilter.cs" />
     <Compile Include="FileExtractor\FileExtractor.cs" />
     <Compile Include="IPluginV1.cs" />
     <Compile Include="ISO-TP\Framing.cs" />
@@ -95,8 +91,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Parsers\Candump\CandumpLine.cs" />
-    <Compile Include="Parsers\Candump\CandumpParser.cs" />
     <Compile Include="CAN\Message.cs" />
     <Compile Include="ISO-TP\ArbitrationId.cs" />
     <Compile Include="MainWindow.xaml.cs">
@@ -132,6 +126,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

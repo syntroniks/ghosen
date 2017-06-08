@@ -42,13 +42,51 @@ namespace ghosen.Plugins
 			{
 				ret.Interface = interfaceMatch.Groups[1].Value;
 			}
+            
+			ret.Message = ParseCandumpMessage(line);
 
-			ret.Message = CAN.Message.Parse(line);
-
-			return ret;
+            return ret;
 		}
 
-		private static DateTime DateTimeFromSpecialUnixTime(string unixTime)
+        public static CAN.Message ParseCandumpMessage(string messageString)
+        {
+            var ret = new CAN.Message();
+
+            // Parse id first
+            var arbIdMatcher = Regex.Match(messageString, @" ([A-Fa-f0-9]{3})#");
+
+            // We could extract the arb id
+            if (arbIdMatcher.Groups.Count == 2)
+            {
+                // extract the arb id
+                var arbIdString = arbIdMatcher.Groups[1].Value;
+                // parse the arb id
+                var candidateArbId = uint.Parse(arbIdString, System.Globalization.NumberStyles.HexNumber);
+                ret.ArbId = candidateArbId;
+            }
+            else
+            {
+                return null;
+            }
+
+
+            // Now handle data (only 8 byte packets at the moment)
+            var rawDataMatcher = Regex.Match(messageString, @"#([A-Fa-f0-9]*)");
+
+            // We could extract the raw data
+            if (rawDataMatcher.Groups.Count == 2)
+            {
+                // extract the raw data
+                var rawDataString = rawDataMatcher.Groups[1].Value;
+                // parse the raw data
+                var candidateRawData = Utils.StringToByteArrayFastest(rawDataString);
+                ret.RawData = candidateRawData;
+            }
+
+            return ret;
+        }
+
+        private static DateTime DateTimeFromSpecialUnixTime(string unixTime)
 		{
 			var split = unixTime.Split('.');
 			var seconds = int.Parse(split[0]);

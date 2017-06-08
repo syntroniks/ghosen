@@ -16,7 +16,7 @@ namespace ghosen.Tests
             var testLine = "";
 
             // act
-            var result = ghosen.Parsers.Kvaser.KvaserLine.Parse(testLine);
+            var result = ghosen.Plugins.KvaserLine.Parse(testLine);
 
             // assert
             Assert.AreEqual(default(DateTime), result.Time);
@@ -34,7 +34,7 @@ namespace ghosen.Tests
             var testLine = " 1827.826927  1         7E0    Rx  ";
 
             // act
-            var result = ghosen.Parsers.Kvaser.KvaserLine.Parse(testLine);
+            var result = ghosen.Plugins.KvaserLine.Parse(testLine);
 
             // assert
             Assert.AreEqual(TimeSpan.FromSeconds(1827.826927), result.Time.TimeOfDay);

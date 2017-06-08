@@ -63,6 +63,10 @@
       <Project>{5d17ff77-5157-4e0c-b6cc-80e24f5cc3f3}</Project>
       <Name>CandumpFile</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Plugins\KvaserFile\KvaserFile.csproj">
+      <Project>{58fa96b1-0af7-4143-8f6d-2b181b5c3e62}</Project>
+      <Name>KvaserFile</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
