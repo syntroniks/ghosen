@@ -3,10 +3,22 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ghosen"
+        xmlns:vm="clr-namespace:ghosen.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525" Loaded="Window_Loaded">
-    <Grid>
-        
-    </Grid>
+    <DockPanel>
+        <!--
+        <DockPanel.DataContext>
+            <vm:MainWindowViewModel />
+        </DockPanel.DataContext>
+        -->
+        <ListView ItemsSource="{Binding Strings}">
+            <DockPanel.Dock>Top</DockPanel.Dock>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock x:Name="DataItem" Text="{Binding}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </DockPanel>
 </Window>

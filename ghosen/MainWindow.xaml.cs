@@ -23,23 +23,32 @@ namespace ghosen
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+        ViewModels.MainWindowViewModel vm = null;
+
 		public MainWindow()
 		{
-			InitializeComponent();			
+			InitializeComponent();
+            vm = new ViewModels.MainWindowViewModel();
+            this.DataContext = vm;
 		}
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
             var pl = new PluginLoader("Plugins");
             pl.Reload();
-            var parser = pl.Plugins.ElementAt(0);
+            var parser = pl.Plugins.ElementAt(1);
 
             //var filter = new CandumpParserArbIdFilter(new List<uint>() { 0x7E0, 0x7E8 });
-			var candumpLines = File.ReadAllLines("../../candump-2017-01-06_135802.log");
-            var msg = parser.ParseLines(candumpLines);
-            var messages = ISO_TP.ISO_TP_Session.ProcessFrames(msg);
+            
+			var candumpLines = File.ReadAllLines(@"input.txt").Skip(50).ToArray();
+            var msg = parser.ParseLines(candumpLines).ToArray();
+            var messages = ISO_TP.ISO_TP_Session.ProcessFrames(msg).ToArray();
             var commands = ISO14229.MessageParser.ProcessMessages(messages);
             var fileChunks = FileExtractor.FileExtractor.ProcessMessages(commands).ToList();
+            foreach (var item in commands)
+            {
+                vm.Strings.Add(item.ToString());
+            }
 
             /*
             var a = CandumpParser.ParseLines(candumpLines, filter);
@@ -58,6 +67,6 @@ namespace ghosen
 			//var p = CandumpParser.ParseStream(File.OpenRead("../../candump-2017-01-06_135802.log"));
             */
 
-		}
+        }
 	}
 }

@@ -19,6 +19,21 @@ namespace ghosen.ISO_TP
 			foreach (var message in messages)
 			{
 				var parsedFrame = Framing.FrameParser.Parse(message.RawData);
+                if (parsedFrame == null)
+                {
+                    // This is an error condition -- let's figure out how to handle this later...
+                    // Maybe we should drop it
+                    /*
+                    yield return new ISO_TP.Message()
+                    {
+                        ArbId = new ArbitrationId(message.ArbId),
+                        Payload = message.RawData,
+                        Complete = true,
+                        MultiFrame = false
+                    };
+                    */
+                    continue;
+                }
 				switch (parsedFrame.FrameType)
 				{
 					case Framing.FrameType.Single:

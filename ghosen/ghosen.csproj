@@ -83,6 +83,7 @@
     <Compile Include="ISO15031\Services.cs" />
     <Compile Include="PluginLoader.cs" />
     <Compile Include="Utils.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

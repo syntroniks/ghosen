@@ -22,11 +22,15 @@ namespace ghosen.Plugins
         {
             foreach (var line in lines)
             {
-                var tmp = KvaserLine.Parse(line).Message;
-                if (tmp.ArbId == 0x7E0 ||
-                    tmp.ArbId == 0x7E8)
+                var tmp = KvaserLine.Parse(line);
+                if (tmp != null &&
+                    tmp.Message != null)
                 {
-                    yield return tmp;
+                    if (tmp.Message.ArbId == 0x7E0 ||
+                        tmp.Message.ArbId == 0x7E8)
+                    {
+                        yield return tmp.Message;
+                    }
                 }
             }
             yield break;
