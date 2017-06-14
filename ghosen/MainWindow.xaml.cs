@@ -18,28 +18,33 @@ using System.Windows.Shapes;
 
 namespace ghosen
 {
-	/// <summary>
-	/// Interaction logic for MainWindow.xaml
-	/// </summary>
-	public partial class MainWindow : Window
-	{
-		public MainWindow()
-		{
-			InitializeComponent();			
-		}
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
 
-		private void Window_Loaded(object sender, RoutedEventArgs e)
-		{
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
             var pl = new PluginLoader("Plugins");
             pl.Reload();
-            var parser = pl.Plugins.ElementAt(0);
+            var parser = pl.Plugins.ElementAt(1);
 
-            //var filter = new CandumpParserArbIdFilter(new List<uint>() { 0x7E0, 0x7E8 });
-			var candumpLines = File.ReadAllLines("../../candump-2017-01-06_135802.log");
-            var msg = parser.ParseLines(candumpLines);
-            var messages = ISO_TP.ISO_TP_Session.ProcessFrames(msg);
+            var filter = new Plugins.ArbIdFilter(new List<uint>() { 0x7E0, 0x7E8 });
+
+            var candumpLines = File.ReadAllLines(@"C:\Users\stefan.giroux\Documents\GolfR\ianGolfRAPR004.txt").ToArray();
+            var msg = parser.ParseLines(candumpLines, filter).ToArray();
+            var messages = ISO_TP.ISO_TP_Session.ProcessFrames(msg).ToArray();
             var commands = ISO14229.MessageParser.ProcessMessages(messages);
             var fileChunks = FileExtractor.FileExtractor.ProcessMessages(commands).ToList();
+            foreach (var item in commands)
+            {
+                //vm.Strings.Add(item.ToString());
+            }
 
             /*
             var a = CandumpParser.ParseLines(candumpLines, filter);
@@ -58,6 +63,6 @@ namespace ghosen
 			//var p = CandumpParser.ParseStream(File.OpenRead("../../candump-2017-01-06_135802.log"));
             */
 
-		}
-	}
+        }
+    }
 }

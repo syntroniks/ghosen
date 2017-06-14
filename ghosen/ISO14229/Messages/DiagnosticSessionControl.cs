@@ -21,13 +21,13 @@ namespace ghosen.ISO14229.Messages
         public DiagnosticSessionControl(ISO_TP.Message message)
             : base(message)
         {
-            SessionType = (DiagnosticSessionType)message.Payload[1];
-            if (base.MessageType == ServiceMessageType.Request)
-            {
-            }
-            else
-            {
-
+                SessionType = (DiagnosticSessionType)message.Payload[1];
+                if (base.MessageType == ServiceMessageType.Request)
+                {
+                }
+                else
+                {
+                }
             }
         }
     }

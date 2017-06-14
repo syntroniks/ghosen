@@ -42,7 +42,6 @@
   <ItemGroup>
     <Compile Include="CandumpLine.cs" />
     <Compile Include="CandumpParser.cs" />
-    <Compile Include="CandumpParserArbIdFilter.cs" />
     <Compile Include="CandumpFilePlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

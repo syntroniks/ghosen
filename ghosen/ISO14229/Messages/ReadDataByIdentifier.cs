@@ -13,7 +13,7 @@ namespace ghosen.ISO14229.Messages
         public ReadDataByIdentifier(ISO_TP.Message message)
             : base(message)
         {
-            Identifier = BitConverter.ToUInt16(message.Payload, 1);
+            Identifier = (ushort)(message.Payload[1] << 8 | message.Payload[2]); // big endian conversion
             // we don't handle multiple identifiers at the moment
             if (message.PayloadSize > 3)
             {

@@ -21,12 +21,16 @@ namespace ghosen.Plugins
             Message = new CAN.Message();
         }
 
-		public static KvaserLine Parse(string line)
+        private static readonly Regex timeRegex = new Regex(@"([0-9.]+)", RegexOptions.Compiled);
+        private static readonly Regex idRegex = new Regex(@" ([A-Fa-f0-9]{3}) ", RegexOptions.Compiled);
+        private static readonly Regex rawDataRegex = new Regex(@"( ([A-Fa-f0-9]{2} )+)", RegexOptions.Compiled);
+
+        public static KvaserLine Parse(string line)
 		{
 			var ret = new KvaserLine();
 
 			// Parse time first
-			var timeMatch = Regex.Match(line, @"([0-9.]+)");
+			var timeMatch = timeRegex.Match(line);
 
 			// We could extract the time
 			if (timeMatch.Groups.Count == 2)
@@ -47,17 +51,8 @@ namespace ghosen.Plugins
 			}
             //*/
 
-			ret.Message = ParseKvaserMessage(line);
-
-			return ret;
-        }
-
-        public static CAN.Message ParseKvaserMessage(string messageString)
-        {
-            var ret = new CAN.Message();
-
             // Parse id first
-            var arbIdMatcher = Regex.Match(messageString, @" ([A-Fa-f0-9]{3}) ");
+            var arbIdMatcher = idRegex.Match(line);
 
             // We could extract the arb id
             if (arbIdMatcher.Groups.Count == 2)
@@ -66,12 +61,12 @@ namespace ghosen.Plugins
                 var arbIdString = arbIdMatcher.Groups[1].Value;
                 // parse the arb id
                 var candidateArbId = uint.Parse(arbIdString, System.Globalization.NumberStyles.HexNumber);
-                ret.ArbId = candidateArbId;
+                ret.Message.ArbId = candidateArbId;
             }
 
 
             // Now handle data (only 8 byte packets at the moment)
-            var rawDataMatcher = Regex.Match(messageString, @"( ([A-Fa-f0-9]{2} )+)");
+            var rawDataMatcher = rawDataRegex.Match(line);
 
             // We could extract the raw data
             if (rawDataMatcher.Groups.Count >= 2)
@@ -80,12 +75,10 @@ namespace ghosen.Plugins
                 var rawDataString = rawDataMatcher.Groups[1].Value.Replace(" ", "");
                 // parse the raw data
                 var candidateRawData = Utils.StringToByteArrayFastest(rawDataString);
-                ret.RawData = candidateRawData;
+                ret.Message.RawData = candidateRawData;
             }
             else
             {
-                // no raw data, throw off a cliff.
-                return null;
             }
 
             return ret;

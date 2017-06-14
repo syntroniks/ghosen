@@ -81,6 +81,7 @@
     <Compile Include="ISO14229\Messages\SecurityAccessControl.cs" />
     <Compile Include="ISO14229\Services.cs" />
     <Compile Include="ISO15031\Services.cs" />
+    <Compile Include="ArbIdFilter.cs" />
     <Compile Include="PluginLoader.cs" />
     <Compile Include="Utils.cs" />
     <Page Include="MainWindow.xaml">

@@ -33,7 +33,7 @@ namespace ghosen.Plugins
 		}
         //*/
 
-        public static List<KvaserLine> ParseLines(string[] lines, KvaserParserArbIdFilter filter = null)
+        public static List<KvaserLine> ParseLines(string[] lines, IPluginLineFilterV1 filter = null)
         {
             // first strip the header out
             StripHeader(ref lines);
@@ -55,7 +55,7 @@ namespace ghosen.Plugins
                 {
                     if (filter != null)
                     {
-                        if (filter.ShouldAcceptLine(currentLine))
+                        if (filter.ShouldAcceptLine(currentLine.Message))
                         {
                             ret.Add(currentLine);
                         }

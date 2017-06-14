@@ -26,6 +26,11 @@ namespace ghosen
         /// <returns></returns>
         CAN.Message ParseLine(string line);
 
-        IEnumerable<CAN.Message> ParseLines(IEnumerable<string> lines);
+        IEnumerable<CAN.Message> ParseLines(IEnumerable<string> lines, IPluginLineFilterV1 filter = null);
+    }
+
+    public interface IPluginLineFilterV1
+    {
+        bool ShouldAcceptLine(CAN.Message msg);
     }
 }
