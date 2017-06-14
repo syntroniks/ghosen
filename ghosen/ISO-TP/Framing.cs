@@ -38,7 +38,6 @@ namespace ghosen.ISO_TP
 				{
 					case Framing.FrameType.Single:
 						var castFrame3 = (Framing.SingleFrame)parsedFrame;
-						finishedMessages.Add(castFrame3.RawData);
                         yield return new ISO_TP.Message()
                         {
 							ArbId = new ArbitrationId(message.ArbId),
@@ -67,9 +66,6 @@ namespace ghosen.ISO_TP
 							rawDataCollector.AddRange(castFrame1.RawData);
 							if (rawDataCollector.Count >= awaitingLength)
 							{
-								awaitingLength = 0;
-								awaitingConsecutive = false;
-								finishedMessages.Add(rawDataCollector.ToArray());
                                 yield return new ISO_TP.Message()
                                 {
                                     ArbId = new ArbitrationId(message.ArbId),
@@ -78,7 +74,9 @@ namespace ghosen.ISO_TP
                                     Complete = true,
                                     MultiFrame = true
                                 };
-							}
+                                awaitingLength = 0;
+                                awaitingConsecutive = false;
+                            }
 						}
 						else
 						{
