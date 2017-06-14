@@ -43,7 +43,6 @@
     <Compile Include="KvaserFilePlugin.cs" />
     <Compile Include="KvaserLine.cs" />
     <Compile Include="KvaserParser.cs" />
-    <Compile Include="KvaserParserArbIdFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

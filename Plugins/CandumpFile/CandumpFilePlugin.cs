@@ -18,15 +18,36 @@ namespace ghosen.Plugins
             return CandumpLine.Parse(line).Message;
         }
 
-        public IEnumerable<Message> ParseLines(IEnumerable<string> lines)
+        public IEnumerable<Message> ParseLines(IEnumerable<string> lines, IPluginLineFilterV1 filter = null)
         {
             foreach (var line in lines)
             {
-                var tmp = CandumpLine.Parse(line).Message;
-                if (tmp.ArbId == 0x7E0 ||
-                    tmp.ArbId == 0x7E8)
+                var parsedLine = CandumpLine.Parse(line);
+                // If we have a problem with the parsed line, just forget about it
+                if (parsedLine == null)
                 {
-                    yield return tmp;
+                    continue;
+                }
+
+                // If we've got a filter
+                if (filter != null)
+                {
+                    // use it
+                    if (filter.ShouldAcceptLine(parsedLine.Message))
+                    {
+                        var parsedMessage = parsedLine.Message;
+                        yield return parsedMessage;
+                    }
+                    else
+                    {
+                        // This message didn't meet the filter
+                        continue;
+                    }
+                }
+                else
+                {
+                    // no filter, pass it all
+                    yield return parsedLine.Message;
                 }
             }
             yield break;

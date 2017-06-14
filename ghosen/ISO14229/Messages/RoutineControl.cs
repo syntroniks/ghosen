@@ -58,22 +58,22 @@ namespace ghosen.ISO14229.Messages
             : base(message)
         {
             this.RoutineIdentifier = (SIMOS18_RoutineIdentifier)base.RoutineIdentifier;
-            var a = RoutineInformation.Parse(this.RoutineIdentifier, this.RoutineControlOptionRecord);
+            var a = RoutineInformation.Parse(this.MessageType, this.RoutineIdentifier, this.RoutineControlOptionRecord);
         }
 
         public class RoutineInformation
         {
-            public static RoutineInformation Parse(SIMOS18_RoutineIdentifier routineIdentifier, byte[] options)
+            public static RoutineInformation Parse(ServiceMessageType msgType, SIMOS18_RoutineIdentifier routineIdentifier, byte[] options)
             {
                 RoutineInformation ret = null;
 
                 switch (routineIdentifier)
                 {
                     case SIMOS18_RoutineIdentifier.SIMOS18_1_ERASE_SEGMENT:
-                        ret = new EraseSegmentRoutine(options);
+                        ret = new EraseSegmentRoutine(msgType, options);
                         break;
                     case SIMOS18_RoutineIdentifier.SIMOS18_1_VALIDATE_SEGMENT:
-                        ret = new ValidateSegmentRoutine(options);
+                        ret = new ValidateSegmentRoutine(msgType, options);
                         break;
                     case SIMOS18_RoutineIdentifier.SIMOS18_1_START_FLASH:
                         ret = new StartFlashRoutine();
@@ -88,23 +88,29 @@ namespace ghosen.ISO14229.Messages
 
         public class EraseSegmentRoutine : RoutineInformation
         {
-            public int SegmentID { get; set; }
+            public int? SegmentID { get; set; }
             // parse segment number
-            public EraseSegmentRoutine(byte[] options)
+            public EraseSegmentRoutine(ServiceMessageType msgType, byte[] options)
                 : base()
             {
-                SegmentID = options[1];
+                if (msgType == ServiceMessageType.Request)
+                {
+                    SegmentID = options[1];
+                }
             }
         }
 
         public class ValidateSegmentRoutine : RoutineInformation
         {
-            public int SegmentID { get; set; }
+            public int? SegmentID { get; set; }
             // parse segment number
-            public ValidateSegmentRoutine(byte[] options)
+            public ValidateSegmentRoutine(ServiceMessageType msgType, byte[] options)
                 : base()
             {
-                SegmentID = options[1];
+                if (msgType == ServiceMessageType.Request)
+                {
+                    SegmentID = options[1];
+                }
             }
         }
 

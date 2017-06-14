@@ -29,7 +29,7 @@ namespace ghosen.Plugins
 
 			return ret;
 		}
-		public static List<CandumpLine> ParseLines(string[] lines, CandumpParserArbIdFilter filter = null)
+		public static List<CandumpLine> ParseLines(string[] lines, IPluginLineFilterV1 filter = null)
 		{
 			var ret = new List<CandumpLine>();
 			var pastProgress = 0;
@@ -44,25 +44,28 @@ namespace ghosen.Plugins
 
 				var currentLineStr = lines[i];
 				var currentLine = CandumpLine.Parse(currentLineStr);
-				if (filter != null)
-				{
-					if (filter.ShouldAcceptLine(currentLine))
-					{
-						ret.Add(currentLine);
-					}
-					else
-					{
-						continue;
-					}
-				}
-				else
-				{
-					// we have no filter, accept all
-					ret.Add(currentLine);
-				}
-			}
+                if (currentLine.Message != null)
+                {
+                    if (filter != null)
+                    {
+                        if (filter.ShouldAcceptLine(currentLine.Message))
+                        {
+                            ret.Add(currentLine);
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        // we have no filter, accept all
+                        ret.Add(currentLine);
+                    }
+                }
+            }
 
-			return ret;
-		}
-	}
+            return ret;
+        }
+    }
 }

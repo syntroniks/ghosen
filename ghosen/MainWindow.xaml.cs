@@ -32,8 +32,8 @@ namespace ghosen
             this.DataContext = vm;
 		}
 
-		private void Window_Loaded(object sender, RoutedEventArgs e)
-		{
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
             var pl = new PluginLoader("Plugins");
             pl.Reload();
             var parser = pl.Plugins.ElementAt(1);
