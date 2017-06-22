@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.6
+VisualStudioVersion = 15.0.26430.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ghosen", "ghosen\ghosen.csproj", "{8247FE08-01EE-4112-8AF9-61EF69DC4D8B}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CandumpFile", "Plugins\CandumpFile\CandumpFile.csproj", "{5D17FF77-5157-4E0C-B6CC-80E24F5CC3F3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KvaserFile", "Plugins\KvaserFile\KvaserFile.csproj", "{58FA96B1-0AF7-4143-8F6D-2B181B5C3E62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VehicleSpyFile", "Plugins\VehicleSpyFile\VehicleSpyFile.csproj", "{3C24B98C-E47A-42A1-968B-DF4E2B51E4FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{58FA96B1-0AF7-4143-8F6D-2B181B5C3E62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58FA96B1-0AF7-4143-8F6D-2B181B5C3E62}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58FA96B1-0AF7-4143-8F6D-2B181B5C3E62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C24B98C-E47A-42A1-968B-DF4E2B51E4FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C24B98C-E47A-42A1-968B-DF4E2B51E4FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C24B98C-E47A-42A1-968B-DF4E2B51E4FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C24B98C-E47A-42A1-968B-DF4E2B51E4FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -42,5 +48,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{5D17FF77-5157-4E0C-B6CC-80E24F5CC3F3} = {968FA0C1-AF54-4B2B-80DE-E1A829D06C1D}
 		{58FA96B1-0AF7-4143-8F6D-2B181B5C3E62} = {968FA0C1-AF54-4B2B-80DE-E1A829D06C1D}
+		{3C24B98C-E47A-42A1-968B-DF4E2B51E4FB} = {968FA0C1-AF54-4B2B-80DE-E1A829D06C1D}
 	EndGlobalSection
 EndGlobal

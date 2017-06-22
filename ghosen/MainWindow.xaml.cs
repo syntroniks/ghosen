@@ -38,10 +38,10 @@ namespace ghosen
             pl.Reload();
             var parser = pl.Plugins.ElementAt(1);
 
-            //var filter = new CandumpParserArbIdFilter(new List<uint>() { 0x7E0, 0x7E8 });
+            var filter = new Plugins.ArbIdFilter(new List<uint>() { 0x7E0, 0x7E8 });
             
-			var candumpLines = File.ReadAllLines(@"input.txt").Skip(50).ToArray();
-            var msg = parser.ParseLines(candumpLines).ToArray();
+			var candumpLines = File.ReadAllLines(@"C:\Users\stefan.giroux\Documents\GolfR\ianGolfRAPR004.txt").ToArray();
+            var msg = parser.ParseLines(candumpLines, filter).ToArray();
             var messages = ISO_TP.ISO_TP_Session.ProcessFrames(msg).ToArray();
             var commands = ISO14229.MessageParser.ProcessMessages(messages);
             var fileChunks = FileExtractor.FileExtractor.ProcessMessages(commands).ToList();
