@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using System.Globalization;
 
 namespace ghosen.Plugins
 {
@@ -23,26 +24,35 @@ namespace ghosen.Plugins
 
         private static readonly Regex timeRegex = new Regex(@"([0-9.]+)", RegexOptions.Compiled);
         private static readonly Regex idRegex = new Regex(@" ([A-Fa-f0-9]{3}) ", RegexOptions.Compiled);
-        private static readonly Regex rawDataRegex = new Regex(@"( ([A-Fa-f0-9]{2} )+)", RegexOptions.Compiled);
+        private static readonly Regex rawDataRegex = new Regex(@"(([A-Fa-f0-9]{2})+)", RegexOptions.Compiled);
 
         public static VehicleSpyLine Parse(string line)
 		{
 			var ret = new VehicleSpyLine();
 
 			// Parse time first
-			var timeMatch = timeRegex.Match(line);
+			// TODO: maybe directly parse datetime
+			var fields = line.Split(',');
 
-			// We could extract the time
-			if (timeMatch.Groups.Count == 2)
+			if (fields.Length < 9) // probably not the line we want
 			{
-				// extract the time
-				var timeString = timeMatch.Groups[1].Value;
-
-                // This is pretty fragile :<
-				ret.Time = new DateTime().AddSeconds(double.Parse(timeString));
+				// should we return null?
+				return ret;
 			}
 
-            /*/ No support at the moment
+			// We aren't using C#7's fancy out variable declaration
+			// because it isn't compatible with edit and continue.
+			// This is something that can be added as this plugin nears completion since it saves lines of code.
+			DateTime parsed;
+			var timeMatch = DateTime.TryParse(fields[1], out parsed);
+
+			// We could extract the time
+			if (timeMatch)
+			{
+				ret.Time = parsed;
+			}
+
+			/*/ No support at the moment
 			// Now get the interface name assuming the interface is of the form " [v]<can><0-9> " (note the spaces)
 			var interfaceMatch = Regex.Match(line, @" (v?can[0-9]) ");
 			if (interfaceMatch.Groups.Count == 2)
@@ -51,35 +61,39 @@ namespace ghosen.Plugins
 			}
             //*/
 
-            // Parse id first
-            var arbIdMatcher = idRegex.Match(line);
+			// extract the arb id
+			var arbIdString = fields[9];
 
+			// parse the arb id
+			uint candidateArbId;
+			bool arbIdMatch = uint.TryParse(arbIdString, System.Globalization.NumberStyles.HexNumber, CultureInfo.InvariantCulture, out candidateArbId);
+			
             // We could extract the arb id
-            if (arbIdMatcher.Groups.Count == 2)
-            {
-                // extract the arb id
-                var arbIdString = arbIdMatcher.Groups[1].Value;
-                // parse the arb id
-                var candidateArbId = uint.Parse(arbIdString, System.Globalization.NumberStyles.HexNumber);
-                ret.Message.ArbId = candidateArbId;
-            }
+            if (arbIdMatch)
+			{
+				ret.Message.ArbId = candidateArbId;
+			}
 
 
-            // Now handle data (only 8 byte packets at the moment)
-            var rawDataMatcher = rawDataRegex.Match(line);
+			// Now handle data (only 8 byte packets at the moment)
+			StringBuilder sb = new StringBuilder();
+			for (int i = 12; i < fields.Length; i++)
+			{
+				sb.Append(fields[i]);
+			}
 
-            // We could extract the raw data
-            if (rawDataMatcher.Groups.Count >= 2)
-            {
-                // extract the raw data
-                var rawDataString = rawDataMatcher.Groups[1].Value.Replace(" ", "");
-                // parse the raw data
-                var candidateRawData = Utils.StringToByteArrayFastest(rawDataString);
-                ret.Message.RawData = candidateRawData;
-            }
-            else
-            {
-            }
+			// extract the raw data
+			var rawDataString = sb.ToString();
+			// parse the raw data
+			// TODO: Better error handling. This fails on metadata lines
+			try
+			{
+				var candidateRawData = Utils.StringToByteArrayFastest(rawDataString);
+				ret.Message.RawData = candidateRawData;
+			}
+			catch (Exception)
+			{
+			}
 
             return ret;
         }
