@@ -12,7 +12,7 @@
             <vm:MainWindowViewModel />
         </DockPanel.DataContext>
         -->
-        <ListView ItemsSource="{Binding Strings}">
+        <ListView ItemsSource="{Binding Strings}" Drop="DropHandler" AllowDrop="True">
             <DockPanel.Dock>Top</DockPanel.Dock>
             <ListView.ItemTemplate>
                 <DataTemplate>

@@ -32,24 +32,34 @@ namespace ghosen
             this.DataContext = vm;
 		}
 
+        private void DropHandler(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+                var pl = new PluginLoader("Plugins");
+                pl.Reload();
+                var parser = pl.Plugins.ElementAt(2);
+
+                var filter = new Plugins.ArbIdFilter(new List<uint>() { 0x7E1, 0x7E9 });
+                // Assuming you have one file that you care about, pass it off to whatever
+                // handling code you have defined.
+                var candumpLines = File.ReadAllLines(files[0]).ToArray();
+                var msg = parser.ParseLines(candumpLines, filter).ToArray();
+                var messages = ISO_TP.ISO_TP_Session.ProcessFrames(msg).ToArray();
+                var commands = ISO14229.MessageParser.ProcessMessages(messages);
+                var fileChunks = FileExtractor.FileExtractor.ProcessMessages(commands).ToList();
+                vm.Strings.Clear();
+                foreach (var item in commands)
+                {
+                    vm.Strings.Add(item.ToString());
+                }
+            }
+        }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var pl = new PluginLoader("Plugins");
-            pl.Reload();
-            var parser = pl.Plugins.ElementAt(1);
-
-            var filter = new Plugins.ArbIdFilter(new List<uint>() { 0x7E0, 0x7E8 });
-            
-			var candumpLines = File.ReadAllLines(@"C:\Users\stefan.giroux\Documents\GolfR\ianGolfRAPR004.txt").ToArray();
-            var msg = parser.ParseLines(candumpLines, filter).ToArray();
-            var messages = ISO_TP.ISO_TP_Session.ProcessFrames(msg).ToArray();
-            var commands = ISO14229.MessageParser.ProcessMessages(messages);
-            var fileChunks = FileExtractor.FileExtractor.ProcessMessages(commands).ToList();
-            foreach (var item in commands)
-            {
-                vm.Strings.Add(item.ToString());
-            }
-
+            return;
             /*
             var a = CandumpParser.ParseLines(candumpLines, filter);
 
