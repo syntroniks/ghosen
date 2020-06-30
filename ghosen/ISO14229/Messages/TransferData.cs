@@ -20,13 +20,16 @@ namespace ghosen.ISO14229.Messages
         // request and response parameters
         public byte BlockSequenceCounter { get; set; }
 
+        public int BlockSize { get; set; }
+
         public byte[] DataRecord { get; set; }
 
         public TransferData(ISO_TP.Message message)
             : base(message)
         {
-            //BlockSequenceCounter = message.Payload[1];
-            DataRecord = message.Payload.Skip(1).ToArray();
+            BlockSize = message.PayloadSize - 2;
+            BlockSequenceCounter = message.Payload[1];
+            DataRecord = message.Payload.Skip(2).Take(BlockSize).ToArray();
             if (base.MessageType == ServiceMessageType.Request)
             {
             }
@@ -38,7 +41,7 @@ namespace ghosen.ISO14229.Messages
 
         public override string ToString()
         {
-            return $"{Enum.GetName(typeof(ServiceType), Service)}{MessageType}: : {BlockSequenceCounter} [{Utils.ByteArrayToHexViaLookup32(DataRecord)}]";
+            return $"{Enum.GetName(typeof(ServiceType), Service)}{MessageType}: {BlockSequenceCounter} : {BlockSize} : [{Utils.ByteArrayToHexViaLookup32(DataRecord)}]";
         }
     }
 }
