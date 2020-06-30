@@ -40,9 +40,9 @@ namespace ghosen
 
                 var pl = new PluginLoader("Plugins");
                 pl.Reload();
-                var parser = pl.Plugins.ElementAt(2);
+                var parser = pl.Plugins.ElementAt(3);
 
-                var filter = new Plugins.ArbIdFilter(new List<uint>() { 0x7E1, 0x7E9 });
+                var filter = new Plugins.ArbIdFilter(new List<uint>() { 0x7E0, 0x7E8 });
                 // Assuming you have one file that you care about, pass it off to whatever
                 // handling code you have defined.
                 var candumpLines = File.ReadAllLines(files[0]).ToArray();
@@ -51,11 +51,21 @@ namespace ghosen
                 var commands = ISO14229.MessageParser.ProcessMessages(messages);
                 var fileChunks = FileExtractor.FileExtractor.ProcessMessages(commands).ToList();
                 vm.Strings.Clear();
+                var count = 0;
+                foreach (var fc in fileChunks)
+                {
+                    File.WriteAllBytes("C:\\dev\\chunks_"+count+"_"+ fc.MemoryAddress +".bin", fc.PayLoad);
+                    count++;
+                }
+                 var dest = File.AppendText("C:\\dev\\annote.txt");
                 foreach (var item in commands)
                 {
                     vm.Strings.Add(item.ToString());
+                    dest.WriteLine(item.ToString());
+
                 }
-            }
+        dest.Close();
+      }
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
