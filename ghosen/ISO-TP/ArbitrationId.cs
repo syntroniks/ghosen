@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ghosen.ISO_TP
+﻿namespace ghosen.ISO_TP
 {
-	/// <summary>
-	/// 11 bits long
-	/// </summary>
-	public struct ArbitrationId
-	{
-		public uint Id;
+  /// <summary>
+  /// 11 bits long
+  /// </summary>
+  public struct ArbitrationId
+  {
+    public uint Id;
 
-		public ArbitrationId(uint _id) : this()
-		{
-			this.Id = _id;
-		}
-	}
+    public ArbitrationId(uint _id) : this()
+    {
+      this.Id = _id;
+    }
+  }
 }

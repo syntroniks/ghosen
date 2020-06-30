@@ -1,29 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Text.RegularExpressions;
 
 namespace ghosen.CAN
 {
-	public class Message
-	{
-		private uint _arbId;
+    public class Message
+    {
+        private uint _arbId;
 
-		public uint ArbId
-		{
-			get { return _arbId; }
-			set { _arbId = value; }
-		}
+        public uint ArbId
+        {
+            get { return _arbId; }
+            set { _arbId = value; }
+        }
 
-		private byte[] _dataBytes;
+        private byte[] _dataBytes;
 
-		public byte[] RawData
-		{
-			get { return _dataBytes; }
-			set { _dataBytes = value; }
-		}
+        public byte[] RawData
+        {
+            get { return _dataBytes; }
+            set { _dataBytes = value; }
+        }
 
         public Message()
         {
@@ -31,10 +27,10 @@ namespace ghosen.CAN
         }
 
         public override string ToString()
-		{
-			return $@"{String.Format("{0:X3}", ArbId)}#{Utils.ByteArrayToHexViaLookup32(RawData)}";
-		}
-        
+        {
+            return $@"{String.Format("{0:X3}", ArbId)}#{Utils.ByteArrayToHexViaLookup32(RawData)}";
+        }
+
         public override bool Equals(object obj)
         {
             if (obj == null || GetType() != obj.GetType())
@@ -57,5 +53,5 @@ namespace ghosen.CAN
             hashCode ^= RawData.GetHashCode();
             return hashCode;
         }
-	}
+    }
 }

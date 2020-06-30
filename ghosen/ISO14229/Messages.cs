@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ghosen.ISO_TP;
+﻿using ghosen.ISO_TP;
 using ghosen.ISO14229.Messages;
+using System;
+using System.Collections.Generic;
 
 namespace ghosen.ISO14229
 {
@@ -30,10 +27,10 @@ namespace ghosen.ISO14229
       }
     }
 
-		public override string ToString()
-		{
-			return $"{Enum.GetName(typeof(ServiceType), Service)}{MessageType} : Len {Data.Length} : {{{Utils.ByteArrayToHexViaLookup32(Data)}}}";
-		}
+    public override string ToString()
+    {
+      return $"{Enum.GetName(typeof(ServiceType), Service)}{MessageType} : Len {Data.Length} : {{{Utils.ByteArrayToHexViaLookup32(Data)}}}";
+    }
 
     internal static ISO14229Message Create(Message message)
     {
