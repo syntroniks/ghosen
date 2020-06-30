@@ -26,19 +26,14 @@ namespace ghosen.ISO14229
       {
         Service = (ServiceType)(msg.Payload[0]);
         MessageType = ServiceMessageType.Request;
+        Data = msg.Payload;
       }
+    }
 
 		public override string ToString()
 		{
 			return $"{Enum.GetName(typeof(ServiceType), Service)}{MessageType} : Len {Data.Length} : {{{Utils.ByteArrayToHexViaLookup32(Data)}}}";
 		}
-      Data = msg.Payload;
-    }
-
-    public override string ToString()
-    {
-      return $"{Enum.GetName(typeof(ServiceType), Service)}{MessageType}: {{{Utils.ByteArrayToHexViaLookup32(Data)}}}";
-    }
 
     internal static ISO14229Message Create(Message message)
     {
