@@ -25,8 +25,8 @@ namespace ghosen.ISO14229.Messages
         public TransferData(ISO_TP.Message message)
             : base(message)
         {
-            BlockSequenceCounter = message.Payload[1];
-            DataRecord = message.Payload.Skip(2).ToArray();
+            //BlockSequenceCounter = message.Payload[1];
+            DataRecord = message.Payload.Skip(1).ToArray();
             if (base.MessageType == ServiceMessageType.Request)
             {
             }

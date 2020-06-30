@@ -18,19 +18,19 @@ using System.Windows.Shapes;
 
 namespace ghosen
 {
-	/// <summary>
-	/// Interaction logic for MainWindow.xaml
-	/// </summary>
-	public partial class MainWindow : Window
-	{
-        ViewModels.MainWindowViewModel vm = null;
+  /// <summary>
+  /// Interaction logic for MainWindow.xaml
+  /// </summary>
+  public partial class MainWindow : Window
+  {
+    ViewModels.MainWindowViewModel vm = null;
 
-		public MainWindow()
-		{
-			InitializeComponent();
-            vm = new ViewModels.MainWindowViewModel();
-            this.DataContext = vm;
-		}
+    public MainWindow()
+    {
+      InitializeComponent();
+      vm = new ViewModels.MainWindowViewModel();
+      this.DataContext = vm;
+    }
 
         private void DropHandler(object sender, DragEventArgs e)
         {
@@ -63,20 +63,23 @@ namespace ghosen
             /*
             var a = CandumpParser.ParseLines(candumpLines, filter);
 
-			var messageList = a.Select((va) => va.Message).ToList();
-			var messages = ISO_TP.ISO_TP_Session.ProcessFrames(messageList);
-			var commands = ISO14229.MessageParser.ProcessMessages(messages);
+      /*
+      var a = CandumpParser.ParseLines(candumpLines, filter);
 
-			var sw = Stopwatch.StartNew();
-			a = CandumpParser.ParseLines(File.ReadAllLines("../../candump-2017-01-06_135802.log"), new CandumpParserArbIdFilter(new List<uint>() { 0x7E0, 0x7E8 }));
-			sw.Stop();
-			//Debug.WriteLine($"Parsed {a.Count} lines in {sw.ElapsedMilliseconds/1000.0d} seconds");
-			messageList = a.Select((va) => va.Message).ToList();
-			messages = ISO_TP.ISO_TP_Session.ProcessFrames(messageList);
-			commands = ISO14229.MessageParser.ProcessMessages(messages);
-			//var p = CandumpParser.ParseStream(File.OpenRead("../../candump-2017-01-06_135802.log"));
-            */
+      var messageList = a.Select((va) => va.Message).ToList();
+      var messages = ISO_TP.ISO_TP_Session.ProcessFrames(messageList);
+      var commands = ISO14229.MessageParser.ProcessMessages(messages);
 
-        }
-	}
+      var sw = Stopwatch.StartNew();
+      a = CandumpParser.ParseLines(File.ReadAllLines("../../candump-2017-01-06_135802.log"), new CandumpParserArbIdFilter(new List<uint>() { 0x7E0, 0x7E8 }));
+      sw.Stop();
+      //Debug.WriteLine($"Parsed {a.Count} lines in {sw.ElapsedMilliseconds/1000.0d} seconds");
+      messageList = a.Select((va) => va.Message).ToList();
+      messages = ISO_TP.ISO_TP_Session.ProcessFrames(messageList);
+      commands = ISO14229.MessageParser.ProcessMessages(messages);
+      //var p = CandumpParser.ParseStream(File.OpenRead("../../candump-2017-01-06_135802.log"));
+      */
+
+    }
+  }
 }
