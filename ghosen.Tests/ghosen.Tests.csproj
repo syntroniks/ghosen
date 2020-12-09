@@ -35,19 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Prism, Version=7.2.0.1367, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
-      <HintPath>..\packages\Prism.Core.7.2.0.1367\lib\net45\Prism.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -64,6 +52,7 @@
   <ItemGroup>
     <Compile Include="CanDumpTests.cs" />
     <Compile Include="KvaserTests.cs" />
+    <Compile Include="KvaserTextFileTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -75,9 +64,21 @@
       <Project>{5d17ff77-5157-4e0c-b6cc-80e24f5cc3f3}</Project>
       <Name>CandumpFile</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Plugins\KvaserCsvFile\KvaserCsvFile.csproj">
+      <Project>{57c07afa-021c-4f0e-92ed-d747590c0c94}</Project>
+      <Name>KvaserCsvFile</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Plugins\KvaserFile\KvaserFile.csproj">
       <Project>{58fa96b1-0af7-4143-8f6d-2b181b5c3e62}</Project>
       <Name>KvaserFile</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Plugins\KvaserTextFile\KvaserTextFile.csproj">
+      <Project>{7b008d1b-99cc-440e-bd9e-b4130dc2d9f6}</Project>
+      <Name>KvaserTextFile</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Plugins\VehicleSpyFile\VehicleSpyFile.csproj">
+      <Project>{3c24b98c-e47a-42a1-968b-df4e2b51e4fb}</Project>
+      <Name>VehicleSpyFile</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
