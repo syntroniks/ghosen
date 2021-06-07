@@ -1,85 +1,28 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{96CF2EE3-9A57-4E9C-A565-983824E47417}</ProjectGuid>
+    <TargetFramework>net5.0-windows</TargetFramework>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ghosen.Tests</RootNamespace>
-    <AssemblyName>ghosen.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
-    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
-    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
-    <IsCodedUITest>False</IsCodedUITest>
-    <TestProjectType>UnitTest</TestProjectType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-  </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
       <ItemGroup>
         <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
       </ItemGroup>
     </When>
-    <Otherwise>
-      <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
-      </ItemGroup>
-    </Otherwise>
+    <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="CanDumpTests.cs" />
-    <Compile Include="KvaserTests.cs" />
-    <Compile Include="KvaserTextFileTests.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.2.4" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.2.4" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ghosen\ghosen.csproj">
-      <Project>{8247fe08-01ee-4112-8af9-61ef69dc4d8b}</Project>
-      <Name>ghosen</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Plugins\CandumpFile\CandumpFile.csproj">
-      <Project>{5d17ff77-5157-4e0c-b6cc-80e24f5cc3f3}</Project>
-      <Name>CandumpFile</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Plugins\KvaserCsvFile\KvaserCsvFile.csproj">
-      <Project>{57c07afa-021c-4f0e-92ed-d747590c0c94}</Project>
-      <Name>KvaserCsvFile</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Plugins\KvaserFile\KvaserFile.csproj">
-      <Project>{58fa96b1-0af7-4143-8f6d-2b181b5c3e62}</Project>
-      <Name>KvaserFile</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Plugins\KvaserTextFile\KvaserTextFile.csproj">
-      <Project>{7b008d1b-99cc-440e-bd9e-b4130dc2d9f6}</Project>
-      <Name>KvaserTextFile</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Plugins\VehicleSpyFile\VehicleSpyFile.csproj">
-      <Project>{3c24b98c-e47a-42a1-968b-df4e2b51e4fb}</Project>
-      <Name>VehicleSpyFile</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\ghosen\ghosen.csproj" />
+    <ProjectReference Include="..\Plugins\CandumpFile\CandumpFile.csproj" />
+    <ProjectReference Include="..\Plugins\KvaserCsvFile\KvaserCsvFile.csproj" />
+    <ProjectReference Include="..\Plugins\KvaserFile\KvaserFile.csproj" />
+    <ProjectReference Include="..\Plugins\KvaserTextFile\KvaserTextFile.csproj" />
+    <ProjectReference Include="..\Plugins\VehicleSpyFile\VehicleSpyFile.csproj" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
@@ -99,13 +42,4 @@
       </ItemGroup>
     </When>
   </Choose>
-  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

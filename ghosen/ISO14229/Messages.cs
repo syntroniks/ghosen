@@ -18,6 +18,7 @@ namespace ghosen.ISO14229
         // responses
         Service = (ServiceType)(msg.Payload[0] - 0x40);
         MessageType = ServiceMessageType.Response;
+        Data = new byte[0];
       }
       else
       {

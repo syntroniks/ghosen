@@ -32,26 +32,22 @@ namespace ghosen
         var filter = new Plugins.ArbIdFilter(new List<uint>() { 0x7E0, 0x7E8 });
         // Assuming you have one file that you care about, pass it off to whatever
         // handling code you have defined.
-        var candumpLines = File.ReadAllLines(files[0]).ToArray();
-        var msg = parser.ParseLines(candumpLines, filter).ToArray();
-        var messages = ISO_TP.ISO_TP_Session.ProcessFrames(msg).ToArray();
+        var candumpLines = File.ReadAllLines(files[0]);
+        var msg = parser.ParseLines(candumpLines, filter);
+        var messages = ISO_TP.ISO_TP_Session.ProcessFrames(msg);
         var commands = ISO14229.MessageParser.ProcessMessages(messages);
         var fileChunks = FileExtractor.FileExtractor.ProcessMessages(commands).ToList();
         vm.Strings.Clear();
         var count = 0;
         foreach (var fc in fileChunks)
         {
-          File.WriteAllBytes("C:\\dev\\chunks_" + count + "_" + fc.MemoryAddress + ".bin", fc.PayLoad);
+          File.WriteAllBytes($"{files[0]}.chunks_{count}_0x{fc.MemoryAddress:X}.bin", fc.PayLoad);
           count++;
         }
-        var dest = File.AppendText("C:\\dev\\annote.txt");
         foreach (var item in commands)
         {
           vm.Strings.Add(item.ToString());
-          dest.WriteLine(item.ToString());
-
         }
-        dest.Close();
       }
     }
     private void Window_Loaded(object sender, RoutedEventArgs e)
