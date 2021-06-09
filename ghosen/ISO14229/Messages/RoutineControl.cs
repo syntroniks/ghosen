@@ -35,7 +35,7 @@ namespace ghosen.ISO14229.Messages
 
     public override string ToString()
     {
-      return $"{base.ToString()} : {SubFunction} {RoutineIdentifier} [{Utils.ByteArrayToHexViaLookup32(RoutineControlOptionRecord)}]";
+      return $"{base.ToString()} : {SubFunction} 0x{RoutineIdentifier:X} [{Utils.ByteArrayToHexViaLookup32(RoutineControlOptionRecord)}]";
     }
   }
 

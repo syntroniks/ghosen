@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ghosen
@@ -52,8 +53,9 @@ namespace ghosen
       return result;
     }
 
-    public static string ByteArrayToHexViaLookup32(byte[] bytes)
+    public static string ByteArrayToHexViaLookup32(IEnumerable<byte> _bytes)
     {
+      var bytes = _bytes.ToArray();
       var lookup32 = _lookup32;
       var result = new char[bytes.Length * 2];
       for (int i = 0; i < bytes.Length; i++)

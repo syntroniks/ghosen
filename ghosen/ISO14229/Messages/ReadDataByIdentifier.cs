@@ -27,7 +27,10 @@ namespace ghosen.ISO14229.Messages
 
     public override string ToString()
     {
-      return $"{base.ToString()} : {Identifier}";
+      if (base.MessageType == ServiceMessageType.Request)
+        return $"{base.ToString()} : 0x{Identifier:X}";
+      else
+        return $"{base.ToString()} : 0x{Identifier:X} - {Utils.ByteArrayToHexViaLookup32(ResponseData)}";
     }
   }
 }
