@@ -15,6 +15,10 @@ namespace ghosen
     public MainWindow()
     {
       InitializeComponent();
+
+      var pl = new PluginLoader(".");
+      pl.Reload();
+
       vm = new ViewModels.MainWindowViewModel();
       this.DataContext = vm;
     }
@@ -25,15 +29,11 @@ namespace ghosen
       {
         string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
 
-        var pl = new PluginLoader("Plugins");
-        pl.Reload();
-        var parser = pl.Plugins.ElementAt(3);
-
         var filter = new Plugins.ArbIdFilter(new List<uint>() { 0x7E0, 0x7E8 });
         // Assuming you have one file that you care about, pass it off to whatever
         // handling code you have defined.
         var candumpLines = File.ReadAllLines(files[0]);
-        var msg = parser.ParseLines(candumpLines, filter);
+        var msg = (selectedParserPlugin.SelectedItem as IPluginV1).ParseLines(candumpLines, filter);
         var messages = ISO_TP.ISO_TP_Session.ProcessFrames(msg);
         var commands = ISO14229.MessageParser.ProcessMessages(messages);
         var fileChunks = FileExtractor.FileExtractor.ProcessMessages(commands).ToList();

@@ -25,6 +25,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GhosenPlugin\GhosenPlugin.csproj" />
+    <ProjectReference Include="..\Plugins\CandumpFile\CandumpFile.csproj" />
+    <ProjectReference Include="..\Plugins\KvaserCsvFile\KvaserCsvFile.csproj" />
+    <ProjectReference Include="..\Plugins\KvaserFile\KvaserFile.csproj" />
+    <ProjectReference Include="..\Plugins\KvaserTextFile\KvaserTextFile.csproj" />
+    <ProjectReference Include="..\Plugins\VehicleSpyFile\VehicleSpyFile.csproj" />
     <ProjectReference Include="..\Utils\Utils.csproj" />
   </ItemGroup>
   <Import Project="..\packages\Fody.6.3.0\build\Fody.targets" Condition="Exists('..\packages\Fody.6.3.0\build\Fody.targets')" />

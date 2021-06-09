@@ -6,19 +6,20 @@
         xmlns:vm="clr-namespace:ghosen.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525" Loaded="Window_Loaded">
-    <DockPanel>
-        <!--
+  <DockPanel>
+    <!--
         <DockPanel.DataContext>
             <vm:MainWindowViewModel />
         </DockPanel.DataContext>
         -->
-        <ListView ItemsSource="{Binding Strings}" Drop="DropHandler" AllowDrop="True">
-            <DockPanel.Dock>Top</DockPanel.Dock>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock x:Name="DataItem" Text="{Binding}" />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </DockPanel>
+    <ComboBox x:Name="selectedParserPlugin" DockPanel.Dock="Bottom" MaxHeight="34" ItemsSource="{Binding Plugins}" />
+
+    <ListView DockPanel.Dock="Bottom" ItemsSource="{Binding Strings}" Drop="DropHandler" AllowDrop="True">
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <TextBlock x:Name="DataItem" Text="{Binding}" />
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+  </DockPanel>
 </Window>
