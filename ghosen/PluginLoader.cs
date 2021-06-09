@@ -54,13 +54,13 @@ namespace ghosen
           Type[] types = assembly.GetTypes();
           foreach (Type type in types)
           {
-            if (type.IsInterface || type.IsAbstract)
+            if (type.IsInterface || type.IsAbstract || !type.IsClass || !type.IsPublic || type.IsValueType)
             {
               continue;
             }
             else
             {
-              if (type.GetInterface(pluginType.FullName) != null)
+              if (type.BaseType.FullName == (pluginType.FullName))
               {
                 pluginTypes.Add(type);
               }

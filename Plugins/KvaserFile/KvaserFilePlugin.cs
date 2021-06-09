@@ -9,16 +9,16 @@ namespace ghosen.Plugins
 {
     public class KvaserFilePlugin : ghosen.IPluginV1
     {
-        public string Name => "KvaserFilePlugin";
+        public override string Name => "KvaserFilePlugin";
 
-        public IEnumerable<string> SupportedFormats => new string[] { "Kvaser file dump" };
+        public override IEnumerable<string> SupportedFormats => new string[] { "Kvaser file dump" };
 
-        public CAN.Message ParseLine(string line)
+        public override CAN.Message ParseLine(string line)
         {
             return KvaserLine.Parse(line).Message;
         }
 
-        public IEnumerable<CAN.Message> ParseLines(IEnumerable<string> lines, IPluginLineFilterV1 filter = null)
+        public override IEnumerable<CAN.Message> ParseLines(IEnumerable<string> lines, IPluginLineFilterV1 filter = null)
         {
             foreach (var line in lines)
             {

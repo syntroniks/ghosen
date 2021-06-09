@@ -9,16 +9,16 @@ namespace ghosen.Plugins
 {
     public class CandumpFilePlugin : ghosen.IPluginV1
     {
-        public string Name => "CandumpFilePlugin";
+        public override string Name => "CandumpFilePlugin";
 
-        public IEnumerable<string> SupportedFormats => new string[] { "Candump file dump" };
+        public override IEnumerable<string> SupportedFormats => new string[] { "Candump file dump" };
 
-        public CAN.Message ParseLine(string line)
+        public override CAN.Message ParseLine(string line)
         {
             return CandumpLine.Parse(line).Message;
         }
 
-        public IEnumerable<Message> ParseLines(IEnumerable<string> lines, IPluginLineFilterV1 filter = null)
+        public override IEnumerable<Message> ParseLines(IEnumerable<string> lines, IPluginLineFilterV1 filter = null)
         {
             foreach (var line in lines)
             {

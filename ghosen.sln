@@ -3,21 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30711.63
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ghosen", "ghosen\ghosen.csproj", "{8247FE08-01EE-4112-8AF9-61EF69DC4D8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ghosen", "ghosen\ghosen.csproj", "{8247FE08-01EE-4112-8AF9-61EF69DC4D8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ghosen.Tests", "ghosen.Tests\ghosen.Tests.csproj", "{96CF2EE3-9A57-4E9C-A565-983824E47417}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ghosen.Tests", "ghosen.Tests\ghosen.Tests.csproj", "{96CF2EE3-9A57-4E9C-A565-983824E47417}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{968FA0C1-AF54-4B2B-80DE-E1A829D06C1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CandumpFile", "Plugins\CandumpFile\CandumpFile.csproj", "{5D17FF77-5157-4E0C-B6CC-80E24F5CC3F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CandumpFile", "Plugins\CandumpFile\CandumpFile.csproj", "{5D17FF77-5157-4E0C-B6CC-80E24F5CC3F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KvaserFile", "Plugins\KvaserFile\KvaserFile.csproj", "{58FA96B1-0AF7-4143-8F6D-2B181B5C3E62}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KvaserFile", "Plugins\KvaserFile\KvaserFile.csproj", "{58FA96B1-0AF7-4143-8F6D-2B181B5C3E62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VehicleSpyFile", "Plugins\VehicleSpyFile\VehicleSpyFile.csproj", "{3C24B98C-E47A-42A1-968B-DF4E2B51E4FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VehicleSpyFile", "Plugins\VehicleSpyFile\VehicleSpyFile.csproj", "{3C24B98C-E47A-42A1-968B-DF4E2B51E4FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KvaserCsvFile", "Plugins\KvaserCsvFile\KvaserCsvFile.csproj", "{57C07AFA-021C-4F0E-92ED-D747590C0C94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KvaserCsvFile", "Plugins\KvaserCsvFile\KvaserCsvFile.csproj", "{57C07AFA-021C-4F0E-92ED-D747590C0C94}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KvaserTextFile", "Plugins\KvaserTextFile\KvaserTextFile.csproj", "{7B008D1B-99CC-440E-BD9E-B4130DC2D9F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KvaserTextFile", "Plugins\KvaserTextFile\KvaserTextFile.csproj", "{7B008D1B-99CC-440E-BD9E-B4130DC2D9F6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GhosenPlugin", "GhosenPlugin\GhosenPlugin.csproj", "{DF9B1139-8829-4286-AF47-1C795B5B911D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{0A685B8C-DB9F-45D1-A2EB-983399FA2316}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +57,14 @@ Global
 		{7B008D1B-99CC-440E-BD9E-B4130DC2D9F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B008D1B-99CC-440E-BD9E-B4130DC2D9F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B008D1B-99CC-440E-BD9E-B4130DC2D9F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF9B1139-8829-4286-AF47-1C795B5B911D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF9B1139-8829-4286-AF47-1C795B5B911D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF9B1139-8829-4286-AF47-1C795B5B911D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF9B1139-8829-4286-AF47-1C795B5B911D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A685B8C-DB9F-45D1-A2EB-983399FA2316}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A685B8C-DB9F-45D1-A2EB-983399FA2316}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A685B8C-DB9F-45D1-A2EB-983399FA2316}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A685B8C-DB9F-45D1-A2EB-983399FA2316}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -63,6 +75,7 @@ Global
 		{3C24B98C-E47A-42A1-968B-DF4E2B51E4FB} = {968FA0C1-AF54-4B2B-80DE-E1A829D06C1D}
 		{57C07AFA-021C-4F0E-92ED-D747590C0C94} = {968FA0C1-AF54-4B2B-80DE-E1A829D06C1D}
 		{7B008D1B-99CC-440E-BD9E-B4130DC2D9F6} = {968FA0C1-AF54-4B2B-80DE-E1A829D06C1D}
+		{DF9B1139-8829-4286-AF47-1C795B5B911D} = {968FA0C1-AF54-4B2B-80DE-E1A829D06C1D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {04BB4D01-3C88-4591-A475-A16D322BD010}

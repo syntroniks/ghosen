@@ -8,16 +8,16 @@ namespace ghosen.Plugins
 {
     public class VehicleSpyPlugin : ghosen.IPluginV1
 	{
-		public string Name => "VehicleSpyFilePlugin";
+		public override string Name => "VehicleSpyFilePlugin";
 
-		public IEnumerable<string> SupportedFormats => new string[] { "Vehicle Spy dump" };
+		public override IEnumerable<string> SupportedFormats => new string[] { "Vehicle Spy dump" };
 
-		public CAN.Message ParseLine(string line)
+		public override CAN.Message ParseLine(string line)
 		{
 			return VehicleSpyLine.Parse(line).Message;
 		}
 
-		public IEnumerable<CAN.Message> ParseLines(IEnumerable<string> lines, IPluginLineFilterV1 filter = null)
+		public override IEnumerable<CAN.Message> ParseLines(IEnumerable<string> lines, IPluginLineFilterV1 filter = null)
 		{
 			foreach (var line in lines)
 			{
