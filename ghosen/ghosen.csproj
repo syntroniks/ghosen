@@ -30,6 +30,7 @@
     <ProjectReference Include="..\Plugins\KvaserFile\KvaserFile.csproj" />
     <ProjectReference Include="..\Plugins\KvaserTextFile\KvaserTextFile.csproj" />
     <ProjectReference Include="..\Plugins\VehicleSpyFile\VehicleSpyFile.csproj" />
+    <ProjectReference Include="..\Plugins\SavvyFile\SavvyFile.csproj" />
     <ProjectReference Include="..\Utils\Utils.csproj" />
   </ItemGroup>
   <Import Project="..\packages\Fody.6.3.0\build\Fody.targets" Condition="Exists('..\packages\Fody.6.3.0\build\Fody.targets')" />
