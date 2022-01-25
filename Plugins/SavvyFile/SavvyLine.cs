@@ -29,29 +29,28 @@ namespace ghosen.Plugins
     public static SavvyLine Parse(string line)
     {
       var ret = new SavvyLine();
+      const int dataFrameIndex = 6;
+      const int fieldLen = 0xE;
+      const int arbIdFrameIndex = 1;
+      const int dataFrameCount = 5;
 
+      //// Example Data Frame "7431355,000007E8,false,Rx,0,8,29,D8,59,81,8F,97,7B,D7,"
       // Parse time first
-      // TODO: maybe directly parse datetime
       var fields = line.Split(',');
 
-      if (fields.Length < 0xE) // probably not the line we want
+      //Expect 14 Fields
+      if (fields.Length < fieldLen) // probably not the line we want
       {
-        // should we return null?
         return ret;
       }
 
-      //// We aren't using C#7's fancy out variable declaration
-      //// because it isn't compatible with edit and continue.
-      //// This is something that can be added as this plugin nears completion since it saves lines of code.
-      //DateTime parsed;
-      //var timeMatch = DateTime.TryParse(fields[0], out parsed);
+      //// Check to see if we are on the header
+      //// "Time Stamp,ID,Extended,Dir,Bus,LEN,D1,D2,D3,D4,D5,D6,D7,D8"
+      if (String.Compare(fields[0], "Time Stamp") == 0)
+      {
+        return ret;
+      }
 
-      //// We could extract the time
-      //if (timeMatch)
-      //{
-      //	ret.Time = parsed;
-
-      //}
       var timeMatch = timeRegex.Match(fields[0]);
 
       // We could extract the time
@@ -61,20 +60,11 @@ namespace ghosen.Plugins
         var timeString = timeMatch.Groups[1].Value;
 
         // This is pretty fragile :<
-        ret.Time = new DateTime().AddMilliseconds(double.Parse(timeString)/1000);
+        // Savvy Can Frames come in as Microseconds convert the to miliseconds
+        ret.Time = new DateTime().AddMilliseconds(double.Parse(timeString) / 1000);
       }
 
-      /*/ No support at the moment
-			// Now get the interface name assuming the interface is of the form " [v]<can><0-9> " (note the spaces)
-			var interfaceMatch = Regex.Match(line, @" (v?can[0-9]) ");
-			if (interfaceMatch.Groups.Count == 2)
-			{
-				ret.Interface = interfaceMatch.Groups[1].Value;
-			}
-            //*/
-
-      // extract the arb id
-      var arbIdString = fields[1];
+      var arbIdString = fields[arbIdFrameIndex];
 
       // parse the arb id
       uint candidateArbId;
@@ -86,10 +76,17 @@ namespace ghosen.Plugins
         ret.Message.ArbId = candidateArbId;
       }
 
+      var dataFrameString = fields[dataFrameCount];
+      int candidateFrameLen;
+      bool dataFrameLenMatch = int.TryParse(dataFrameString, System.Globalization.NumberStyles.HexNumber, CultureInfo.InvariantCulture, out candidateFrameLen);
+      if (!(dataFrameLenMatch))
+      {
+        candidateFrameLen = 8;
+      }
 
-      // Now handle data (only 8 byte packets at the moment)
+      // Now handle data
       StringBuilder sb = new StringBuilder();
-      for (int i = 6; i < 6 + 8; i++)
+      for (int i = dataFrameIndex; i < dataFrameIndex + candidateFrameLen; i++)
       {
         sb.Append(fields[i]);
       }
