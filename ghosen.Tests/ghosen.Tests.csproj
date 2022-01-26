@@ -23,6 +23,7 @@
     <ProjectReference Include="..\Plugins\KvaserFile\KvaserFile.csproj" />
     <ProjectReference Include="..\Plugins\KvaserTextFile\KvaserTextFile.csproj" />
     <ProjectReference Include="..\Plugins\VehicleSpyFile\VehicleSpyFile.csproj" />
+    <ProjectReference Include="..\Plugins\SavvyFile\SavvyFile.csproj" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
